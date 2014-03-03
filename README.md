@@ -8,4 +8,4 @@ repository.
 - **Project 2**: A 4-bit RCA. Introduction to modular design and extended 
 testing with assertions.
 - **Project 3**: A 4-bit CLA. Continuation of modular design and testing.
-- **Project 4**: A 32-bit ALU. Significantly more work than previous labs.
+- **Project 4**: A 4-bit ALU. Significantly more work than previous labs.
