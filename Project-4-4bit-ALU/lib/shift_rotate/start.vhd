@@ -1,0 +1,4 @@
+--http://www.csit-sun.pub.ro/courses/Masterat/Xilinx%20Synthesis%20Technology/toolbox.xilinx.com/docsan/xilinx4/data/docs/xst/hdlcode12.html
+--I don't know if this is what Dr. Salamy is after though. I'm not actually 
+--implementing a shifter at the gate level, which is likely what Dr. 
+--Salamy actually wants to see.
