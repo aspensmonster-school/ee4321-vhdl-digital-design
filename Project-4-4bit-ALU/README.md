@@ -1,3 +1,10 @@
+This project required us to implement a basic ALU with a provided list of
+operations. The input busses, A and B, are four bits long.  For a good visual
+representation of this design, look at the block-diagram.png file in this
+directory. While it shows 32-bit busses, Dr. Salamy only required the four bit
+bus length.
+
+
 Operation Table:
 
 |Operation	|Operation Type	|Opcode|
