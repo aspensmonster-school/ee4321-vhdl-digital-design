@@ -13,3 +13,5 @@
 --one, 0001, is the same as rotating by 5, 0101, which is the same as 
 --rotating by 9, 1001, which is the same as rotating by 13, 1101... etc etc.
 --the two least significant bits are always the same!
+
+--Shifting on the other hand still looks a bit dicey.
