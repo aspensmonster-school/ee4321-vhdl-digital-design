@@ -11,8 +11,7 @@ end logical;
 
 architecture Behavioral of logical is 
 
---signals
-signal b0, b1, b2, b3 : std_logic:='0';
+--output signals
 signal and_R : std_logic_vector (3 downto 0);
 signal or_R : std_logic_vector (3 downto 0);
 signal nor_R : std_logic_vector (3 downto 0);
@@ -27,7 +26,7 @@ nor_R <= A NOR B;
 xor_R <= A XOR B;
 
 --select output based on opcode
-output: entity work.mux4 (and_R, or_R, nor_R, xor_R, op, R);
+output: entity work.mux4 (nor_R, and_R, or_R, xor_R, op, R);
 
 end Behavioral;
 
