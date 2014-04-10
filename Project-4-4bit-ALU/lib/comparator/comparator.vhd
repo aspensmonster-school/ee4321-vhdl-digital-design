@@ -43,9 +43,9 @@ begin
 -- X < Y <--> diff(3) XOR overflow
 -- X > Y <--> !( zero OR ( diff(3) XOR overflow) )
 
---GEQ
+--GEQ SIGNED
 a_GEQ_b_SIGNED_R <= NOT(zero OR (diff(3) XOR overflow) ) OR zero;
---LE
+--LE SIGNED
 a_LE_b_SIGNED_R <= diff(3) XOR overflow;
 
 -------------------------------------------
@@ -57,14 +57,14 @@ a_LE_b_SIGNED_R <= diff(3) XOR overflow;
 a_NEQ_b_UNSIGNED_R <= zero;
 a_EQ_b_UNSIGNED_R <= zero;
 
---GEQ
+--GEQ UNSIGNED
 --diff(3) is only 1 if A is less than B.
 --There is no case where diff(3) is 1, AND zero is 1, 
 --which would cause this to erroneously report a GEQ b.
 --(zero wouldn't get set if diff(3) was also set).
 a_GEQ_b_UNSIGNED_R <= NOT(diff(3)) OR zero;
 
---LE
+--LE UNSIGNED
 --A < B always results in diff(3) being set.
 --no need to check zero because we're looking at 
 --strictly less than.
