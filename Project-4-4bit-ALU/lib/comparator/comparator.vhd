@@ -13,6 +13,7 @@ entity comparator is
            op : in STD_LOGIC_VECTOR (2 downto 0);
            zero : in STD_LOGIC;
            cout : in STD_LOGIC;
+           overflow : in STD_LOGIC;
            diff : in STD_LOGIC_VECTOR (3 downto 0);
            R : out  STD_LOGIC;
          );
@@ -30,7 +31,26 @@ signal a_LE_b_UNSIGNED_R : std_logic:='0';
 
 begin
 
---crunch all possible values
+-------------------------------------------
+--SIGNED PORTIONS
+-------------------------------------------
+
+--SIGNED is a bit more tricky. However, we can take 
+--advantage of the overflow flag and arrive at the 
+--following conclusions:
+--(thanks to: http://teahlab.com/4-Bit_Signed_Comparator/)
+-- X = Y <--> zero
+-- X < Y <--> diff(3) XOR overflow
+-- X > Y <--> !( zero OR ( diff(3) XOR overflow) )
+
+--GEQ
+a_GEQ_b_SIGNED_R <= NOT(zero OR (diff(3) XOR overflow) ) OR zero;
+--LE
+a_LE_b_SIGNED_R <= diff(3) XOR overflow;
+
+-------------------------------------------
+--UNSIGNED PORTIONS
+-------------------------------------------
 
 --EQ/NEQ
 --well, *that* was easy :D
@@ -42,7 +62,7 @@ a_EQ_b_UNSIGNED_R <= zero;
 --There is no case where diff(3) is 1, AND zero is 1, 
 --which would cause this to erroneously report a GEQ b.
 --(zero wouldn't get set if diff(3) was also set).
-a_GEQ_b_UNSIGNED_R <= !(diff(3)) OR zero;
+a_GEQ_b_UNSIGNED_R <= NOT(diff(3)) OR zero;
 
 --LE
 --A < B always results in diff(3) being set.
@@ -50,8 +70,13 @@ a_GEQ_b_UNSIGNED_R <= !(diff(3)) OR zero;
 --strictly less than.
 a_LE_b_UNSIGNED_R <= diff(3);
 
+-------------------------------------------
 --select output based on opcode
-output: entity work.mux8 (nor_R, and_R, or_R, xor_R, op, R);
+-------------------------------------------
+
+output: entity work.mux8 (a_GEQ_b_SIGNED_R, a_LE_B_SIGNED_R,
+a_NEQ_b_UNSIGNED_R, a_EQ_b_UNSIGNED_R, a_GEQ_b_UNSIGNED_R, a_LE_b_UNSIGNED_R,
+DC, DC, op, R);
 
 end Behavioral;
 

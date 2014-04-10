@@ -15,6 +15,7 @@ architecture Behavioral of alu_4_bit is
 --appropriate stages (mostly the output choice mux4)
 signal add_sub_zero : std_logic:='0';
 signal add_sub_Cout : std_logic:='0';
+signal add_sub_overflow : std_logic:='0';
 signal add_sub_R : std_logic_vector (3 downto 0);
 signal comparator_R: std_logic_vector (3 downto 0);
 signal logical_R: std_logic_vector (3 downto 0);
@@ -22,11 +23,11 @@ signal shift_rot_R: std_logic_vector (3 downto 0);
 
 --adder/subtractor unit
 add_sub: entity work.cla_4_bit port map (A, B, op(3), add_sub_R,
-  add_sub_Cout, add_sub_zero);
+  add_sub_Cout, add_sub_zero, add_sub_overflow);
 
 --comparator unit
 comparator: entity work.comparator port map (A, B, op(2 downto 0),
-  add_sub_zero, add_sub_Cout, add_sub_R, comparator_R);
+  add_sub_zero, add_sub_Cout, add_sub_overflow, add_sub_R, comparator_R);
 
 --logical unit
 logical: entity work.logical port map (A, B, op(1 downto 0), logical_R);
