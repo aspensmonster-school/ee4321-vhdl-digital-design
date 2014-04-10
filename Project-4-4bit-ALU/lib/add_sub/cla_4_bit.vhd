@@ -15,7 +15,9 @@ entity cla_4_bit is
            B : in  STD_LOGIC_VECTOR (3 downto 0);
            Cin : in  STD_LOGIC;
            Sum : out  STD_LOGIC_VECTOR (3 downto 0);
-           Cout : out  STD_LOGIC);
+           Cout : out  STD_LOGIC;
+           zero : out STD_LOGIC
+         );
 end cla_4_bit;
 
 architecture Behavioral of cla_4_bit is
@@ -48,6 +50,10 @@ FA1: entity work.full_adder_1_bit port map (A(1),Bxor(1),Cin1,open,Sum(1));
 FA2: entity work.full_adder_1_bit port map (A(2),Bxor(2),Cin2,open,Sum(2));
 
 FA3: entity work.full_adder_1_bit port map (A(3),Bxor(3),Cin3,open,Sum(3));
+
+--if any bit in sum is non-zero, then zero gets set to zero. Otherwise, zero 
+--gets set to one.
+zero <= !(Sum(0) OR Sum(1) OR Sum(2) OR Sum(3));
 
 end Behavioral;
 
