@@ -39,7 +39,7 @@ ARCHITECTURE behavior OF shift_rotate_testBench IS
   --Inputs
   signal A : std_logic_vector(3 downto 0) := (others => '0');
   signal B : std_logic_vector(3 downto 0) := (others => '0');
-  signal op : std_logic_vector(3 downto 0) := (others => '0');
+  signal op : std_logic_vector(2 downto 0) := (others => '0');
 
   --Outputs
   signal R : std_logic_vector(3 downto 0);
