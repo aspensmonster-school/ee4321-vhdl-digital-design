@@ -20,7 +20,7 @@ architecture Behavioural of mux2 is
 begin
 
   with S select
-  R <= bus0 when '0';
+  R <= bus0 when '0',
        bus1 when others;
 
 end Behavioural;

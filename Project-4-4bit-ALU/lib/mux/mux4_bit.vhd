@@ -22,9 +22,9 @@ architecture Behavioural of mux4_bit is
 begin
 
   with S select
-  R <= bit0 when "00";
-       bit1 when "01";
-       bit2 when "10";
+  R <= bit0 when "00",
+       bit1 when "01",
+       bit2 when "10",
        bit3 when "11";
 
 end Behavioural;

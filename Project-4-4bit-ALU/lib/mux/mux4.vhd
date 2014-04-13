@@ -22,9 +22,9 @@ architecture Behavioural of mux4 is
 begin
 
   with S select
-  R <= bus0 when "00";
-       bus1 when "01";
-       bus2 when "10";
+  R <= bus0 when "00",
+       bus1 when "01",
+       bus2 when "10",
        bus3 when "11";
 
 end Behavioural;

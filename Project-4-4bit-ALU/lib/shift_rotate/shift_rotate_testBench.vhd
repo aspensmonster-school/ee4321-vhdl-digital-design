@@ -74,12 +74,12 @@ BEGIN
   variable count : integer :=0;
   
   begin
-    
+
+    -- TEST Rotate Left    
     A <= "0000";
     B <= "0000";
-    
-    -- TEST Rotate Left
     op <= "000";
+
     wait for 1 ns;  
 
     for i in 0 to 15 loop
@@ -104,7 +104,10 @@ BEGIN
     end loop;
 
     -- TEST Rotate Right
+    A <= "0000";
+    B <= "0000";
     op <= "001";
+
     wait for 1 ns;
 
     for i in 0 to 15 loop

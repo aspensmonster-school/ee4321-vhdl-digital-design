@@ -26,13 +26,13 @@ architecture Behavioural of mux8 is
 begin
 
   with S select
-  R <= bus0 when "000";
-       bus1 when "001";
-       bus2 when "010";
-       bus3 when "011";
-       bus4 when "100";
-       bus5 when "101";
-       bus6 when "110";
+  R <= bus0 when "000",
+       bus1 when "001",
+       bus2 when "010",
+       bus3 when "011",
+       bus4 when "100",
+       bus5 when "101",
+       bus6 when "110",
        bus7 when "111";
 
 end Behavioural;
