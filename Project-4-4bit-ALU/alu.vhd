@@ -33,7 +33,7 @@ comparator: entity work.comparator port map (A, B, op(2 downto 0),
 logical: entity work.logical port map (A, B, op(1 downto 0), logical_R);
 
 --shift/rotate unit
-shift_rot: entity work.shift_rot port map (A, B, op(2 downto 0), shift_rot_R);
+shift_rot: entity work.shift_rotate port map (A, B, op(2 downto 0), shift_rot_R);
 
 --output selection mux
 output_choice_mux: entity work.mux4 (add_sub_R, comparator_R, logical_R,
@@ -44,7 +44,7 @@ Cout <= add_sub_Cout;
 
 end Behavioral;
 
---A note: This design is mostly combinatorial and likely purely insane. EVERY 
+--A note: This design is entirely combinatorial and likely purely insane. EVERY
 --operation is carried out, and the output choice mux merely selects which 
 --block_R to push to the ALU's "R" output. This would be a truly terrible 
 --design as far as power constraints go.
