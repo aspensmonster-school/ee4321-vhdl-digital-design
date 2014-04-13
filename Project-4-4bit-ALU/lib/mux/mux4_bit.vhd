@@ -1,8 +1,7 @@
 --Helpful resource:
 --ftp://www.cs.uregina.ca/pub/class/301/multiplexer/lecture.html
-use IEEE.std_logic_1164.all;
-
 library IEEE;
+use IEEE.std_logic_1164.all;
 
 entity mux4_bit is
 
