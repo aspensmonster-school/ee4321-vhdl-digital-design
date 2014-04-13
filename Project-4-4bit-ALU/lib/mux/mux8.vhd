@@ -1,8 +1,7 @@
 --Helpful resource:
 --ftp://www.cs.uregina.ca/pub/class/301/multiplexer/lecture.html
-use IEEE.std_logic_1164.all;
-
 library IEEE;
+use IEEE.std_logic_1164.all;
 
 entity mux8 is
 
@@ -33,6 +32,6 @@ begin
        bus4 when "100",
        bus5 when "101",
        bus6 when "110",
-       bus7 when "111";
+       bus7 when others;
 
 end Behavioural;

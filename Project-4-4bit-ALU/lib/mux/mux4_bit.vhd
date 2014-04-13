@@ -24,6 +24,6 @@ begin
   R <= bit0 when "00",
        bit1 when "01",
        bit2 when "10",
-       bit3 when "11";
+       bit3 when others;
 
 end Behavioural;

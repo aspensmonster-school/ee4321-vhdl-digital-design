@@ -1,8 +1,7 @@
 --Helpful resource:
 --ftp://www.cs.uregina.ca/pub/class/301/multiplexer/lecture.html
-use IEEE.std_logic_1164.all;
-
 library IEEE;
+use IEEE.std_logic_1164.all;
 
 entity mux4 is
 
@@ -25,6 +24,6 @@ begin
   R <= bus0 when "00",
        bus1 when "01",
        bus2 when "10",
-       bus3 when "11";
+       bus3 when others;
 
 end Behavioural;
