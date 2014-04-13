@@ -1,3 +1,14 @@
+--READ THIS LINK:
+--http://homepage.ntlworld.com/jonathan.deboynepollard/FGA/bit-shifts-in-vhdl.html
+--Important bit: 
+
+--Arithmetic and logical shifts and rotates are done with
+--functions in VHDL, not operators.
+--
+--The problem with the operators -- sll, sla, srl, sra, rol, and rar, -- is
+--that they were an afterthought, weren't specified correctly, and have been
+--removed from IEEE 1076. 
+
 LIBRARY ieee;
 USE ieee.std_logic_1164.ALL;
 USE ieee.numeric_std.ALL;
@@ -12,29 +23,30 @@ END shift_rotate_testBench;
  
 ARCHITECTURE behavior OF shift_rotate_testBench IS 
  
-    -- Component Declaration for the Unit Under Test (UUT)
- 
-    COMPONENT shift_rotate
-    PORT(
-         A : IN  std_logic_vector(3 downto 0);
-         B : IN  std_logic_vector(3 downto 0);
-         op : IN std_logic_vector(2 downto 0);
-         R : OUT  std_logic_vector(3 downto 0)
-        );
-    END COMPONENT;
+  -- Component Declaration for the Unit Under Test (UUT)
+  COMPONENT shift_rotate
+
+  PORT(
+    A : IN  std_logic_vector(3 downto 0);
+    B : IN  std_logic_vector(3 downto 0);
+    op : IN std_logic_vector(2 downto 0);
+    R : OUT  std_logic_vector(3 downto 0)
+  );
+
+  END COMPONENT;
     
 
-   --Inputs
-   signal A : std_logic_vector(3 downto 0) := (others => '0');
-   signal B : std_logic_vector(3 downto 0) := (others => '0');
-   signal op : std_logic_vector(3 downto 0) := (others => '0');
+  --Inputs
+  signal A : std_logic_vector(3 downto 0) := (others => '0');
+  signal B : std_logic_vector(3 downto 0) := (others => '0');
+  signal op : std_logic_vector(3 downto 0) := (others => '0');
 
-   --Outputs
-   signal R : std_logic_vector(3 downto 0);
-   -- No clocks detected in port list. Replace <clock> below with 
-   -- appropriate port name 
+  --Outputs
+  signal R : std_logic_vector(3 downto 0);
+  -- No clocks detected in port list. Replace <clock> below with 
+  -- appropriate port name 
  
-   --constant <clock>_period : time := 10 ns;
+  --constant <clock>_period : time := 10 ns;
  
 BEGIN
  
@@ -73,12 +85,15 @@ BEGIN
     for i in 0 to 15 loop
       for j in 0 to 15 loop
         wait for 1 ns;
-        if NOT(R = A rol B) then
-          assert R = A rol B report "R = A rol B should have been " &
-          integer'image(to_integer(unsigned((A rol B)))) & " with A=" &
-          integer'image(to_integer(unsigned(A))) & " and B=" &
-          integer'image(to_integer(unsigned(B))) & " but instead R was " &
-          integer'image(to_integer(unsigned(R))) severity ERROR;
+        if NOT(R = std_logic_vector(rotate_left(unsigned(A),to_integer(unsigned(B))))) 
+        then
+          assert R = std_logic_vector(rotate_left(unsigned(A),to_integer(unsigned(B)))) 
+          report "R = A rol B should have been " &
+          integer'image(to_integer(rotate_left(unsigned(A),to_integer(unsigned(B))))) & 
+          " with A=" & integer'image(to_integer(unsigned(A))) & 
+          " and B=" & integer'image(to_integer(unsigned(B))) & 
+          " but instead R was " & integer'image(to_integer(unsigned(R))) 
+          severity ERROR;
           count := count + 1;
         else
           --nada
@@ -91,16 +106,19 @@ BEGIN
     -- TEST Rotate Right
     op <= "001";
     wait for 1 ns;
-   
+
     for i in 0 to 15 loop
       for j in 0 to 15 loop
         wait for 1 ns;
-        if NOT(R = A ror B) then
-          assert R = A ror B report "R = A ror B should have been " &
-          integer'image(to_integer(unsigned((A rol B)))) & " with A=" &
-          integer'image(to_integer(unsigned(A))) & " and B=" &
-          integer'image(to_integer(unsigned(B))) & " but instead R was " &
-          integer'image(to_integer(unsigned(R))) severity ERROR;
+        if NOT(R = std_logic_vector(rotate_right(unsigned(A),to_integer(unsigned(B))))) 
+        then
+          assert R = std_logic_vector(rotate_right(unsigned(A),to_integer(unsigned(B)))) 
+          report "R = A rol B should have been " &
+          integer'image(to_integer(rotate_right(unsigned(A),to_integer(unsigned(B))))) & 
+          " with A=" & integer'image(to_integer(unsigned(A))) & 
+          " and B=" & integer'image(to_integer(unsigned(B))) & 
+          " but instead R was " & integer'image(to_integer(unsigned(R))) 
+          severity ERROR;
           count := count + 1;
         else
           --nada
@@ -109,8 +127,7 @@ BEGIN
       end loop;
       A <= A + "0001";
     end loop;
-
- 
+   
     --testing done
     report "TEST FINISHED.";
     report "ERROR COUNT: " & integer'image(count);
