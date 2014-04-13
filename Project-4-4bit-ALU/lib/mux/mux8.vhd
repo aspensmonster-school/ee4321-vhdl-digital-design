@@ -14,7 +14,7 @@ entity mux8 is
     bus5 : in std_logic_vector(3 downto 0);
     bus6 : in std_logic_vector(3 downto 0);
     bus7 : in std_logic_vector(3 downto 0);
-    S : in std_logic_vector(1 downto 0);
+    S : in std_logic_vector(2 downto 0);
     R : out std_logic_vector(3 downto 0)
   );
 
