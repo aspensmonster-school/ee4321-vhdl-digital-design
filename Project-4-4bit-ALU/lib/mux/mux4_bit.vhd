@@ -7,10 +7,10 @@ library IEEE;
 entity mux4_bit is
 
   port(
-    bit0 : in std_logic;
-    bit1 : in std_logic;
-    bit2 : in std_logic;
     bit3 : in std_logic;
+    bit2 : in std_logic;
+    bit1 : in std_logic;
+    bit0 : in std_logic;
     S : in std_logic_vector(1 downto 0);
     R : out std_logic
   );
