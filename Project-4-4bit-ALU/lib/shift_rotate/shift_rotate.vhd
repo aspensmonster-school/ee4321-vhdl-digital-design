@@ -42,10 +42,21 @@ magnitude <= B(1 downto 0);
 --but the syntax might be off.
 -------------------------------------------
 
-rol_mux_3: entity work.mux4 (A(0), A(1), A(2), A(3), magnitude, rol_R(3))
-rol_mux_2: entity work.mux4 (A(3), A(0), A(1), A(2), magnitude, rol_R(2))
-rol_mux_1: entity work.mux4 (A(2), A(3), A(0), A(1), magnitude, rol_R(1))
-rol_mux_0: entity work.mux4 (A(1), A(2), A(3), A(0), magnitude, rol_R(0))
+rol_mux_3: entity work.mux4_bit (A(0), A(1), A(2), A(3), magnitude, rol_R(3))
+rol_mux_2: entity work.mux4_bit (A(3), A(0), A(1), A(2), magnitude, rol_R(2))
+rol_mux_1: entity work.mux4_bit (A(2), A(3), A(0), A(1), magnitude, rol_R(1))
+rol_mux_0: entity work.mux4_bit (A(1), A(2), A(3), A(0), magnitude, rol_R(0))
+
+-------------------------------------------
+--Rotate Right
+--going to duplicate a lot of hardware for now,
+--just to be on the safe side of things.
+-------------------------------------------
+
+ror_mux_3: entity work.mux4_bit (A(2), A(1), A(0), A(3), magnitude, ror_R(3))
+ror_mux_2: entity work.mux4_bit (A(1), A(0), A(3), A(2), magnitude, ror_R(2))
+ror_mux_1: entity work.mux4_bit (A(0), A(3), A(2), A(1), magnitude, ror_R(1))
+ror_mux_0: entity work.mux4_bit (A(3), A(2), A(1), A(0), magnitude, ror_R(0))
 
 -------------------------------------------
 --Output
