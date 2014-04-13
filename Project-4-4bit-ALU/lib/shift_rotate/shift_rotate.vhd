@@ -91,8 +91,8 @@ sra_mux_0: entity work.mux4_bit (A(3), A(2), A(1), A(0), magnitude, sra_R(0));
 --Output
 -------------------------------------------
 
-output: entity work.mux8 (rol_R, ror_R, sll_R, srl_R, sra_R, DC,
-DC, DC, op, R);
+output: entity work.mux8 (rol_R, ror_R, sll_R, srl_R, sra_R, -,
+-, -, op, R);
 
 end Behavioral;
 
