@@ -11,9 +11,9 @@ entity mux8 is
     bus2 : in std_logic_vector(3 downto 0);
     bus3 : in std_logic_vector(3 downto 0);
     bus4 : in std_logic_vector(3 downto 0);
-    bus5 : in std_logic_vector(3 downto 0);
-    bus6 : in std_logic_vector(3 downto 0);
-    bus7 : in std_logic_vector(3 downto 0);
+    bus5 : in std_logic_vector(3 downto 0) := (others => '-');
+    bus6 : in std_logic_vector(3 downto 0) := (others => '-');
+    bus7 : in std_logic_vector(3 downto 0) := (others => '-');
     S : in std_logic_vector(2 downto 0);
     R : out std_logic_vector(3 downto 0)
   );
