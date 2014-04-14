@@ -546,7 +546,7 @@ BEGIN
     -- TEST Shift Right Arithmetic
     A <= "0000";
     B <= "0000";
-    op <= "11X011";
+    op <= "11X111";
 
     wait for 1 ns;
 
