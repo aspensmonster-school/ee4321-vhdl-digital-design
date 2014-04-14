@@ -111,8 +111,8 @@ sra_mux_0: entity work.mux4_bit port map
 --Output
 -------------------------------------------
 
-output: entity work.mux8 port map (rol_R, ror_R, sll_R, srl_R, sra_R, -,
--, -, op, R);
+output: entity work.mux8 port map (rol_R, ror_R, sll_R, srl_R, sra_R, open,
+open, open, op, R);
 
 end Behavioral;
 

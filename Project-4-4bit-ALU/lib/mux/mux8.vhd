@@ -7,10 +7,10 @@ entity mux8 is
 
   port(
     bus0 : in std_logic_vector(3 downto 0) := (others => '-');
-    bus1 : in std_logic_vector(3 downto 0);
-    bus2 : in std_logic_vector(3 downto 0);
-    bus3 : in std_logic_vector(3 downto 0);
-    bus4 : in std_logic_vector(3 downto 0);
+    bus1 : in std_logic_vector(3 downto 0) := (others => '-');
+    bus2 : in std_logic_vector(3 downto 0) := (others => '-');
+    bus3 : in std_logic_vector(3 downto 0) := (others => '-');
+    bus4 : in std_logic_vector(3 downto 0) := (others => '-');
     bus5 : in std_logic_vector(3 downto 0) := (others => '-');
     bus6 : in std_logic_vector(3 downto 0) := (others => '-');
     bus7 : in std_logic_vector(3 downto 0) := (others => '-');
