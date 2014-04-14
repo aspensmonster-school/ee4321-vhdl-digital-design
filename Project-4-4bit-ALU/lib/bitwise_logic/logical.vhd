@@ -26,7 +26,7 @@ nor_R <= A NOR B;
 xor_R <= A XOR B;
 
 --select output based on opcode
-output: entity work.mux4 (nor_R, and_R, or_R, xor_R, op, R);
+output: entity work.mux4 port map (nor_R, and_R, or_R, xor_R, op, R);
 
 end Behavioral;
 
