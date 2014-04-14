@@ -7,13 +7,13 @@ USE ieee.std_logic_unsigned.ALL;
 -- arithmetic functions with Signed or Unsigned values
 --USE ieee.numeric_std.ALL;
  
-ENTITY cla_4_bit_testBench IS
-END cla_4_bit_testBench;
+ENTITY alu_testBench IS
+END alu_testBench;
  
 ARCHITECTURE behavior OF alu_testBench IS 
  
   -- Component Declaration for the Unit Under Test (UUT)
-  COMPONENT alu
+  COMPONENT alu_4_bit
 
   PORT(
         A : IN  std_logic_vector(3 downto 0);
@@ -42,11 +42,11 @@ ARCHITECTURE behavior OF alu_testBench IS
 BEGIN
  
   -- Instantiate the Unit Under Test (UUT)
-  uut: cla_4_bit PORT MAP (
+  uut: alu_4_bit PORT MAP (
           A => A,
           B => B,
-          Cin => Cin,
-          Sum => Sum,
+          op => op,
+          R => R,
           Cout => Cout
   );
 
@@ -194,11 +194,11 @@ BEGIN
     for i in 0 to 15 loop
       for j in 0 to 15 loop
         wait for 1 ns;
-        if NOT( R = std_logic_vector( to_integer(unsigned(A)) != to_integer(unsigned(B)) ) )
+        if NOT( R = std_logic_vector( to_integer(unsigned(A)) /= to_integer(unsigned(B)) ) )
         then
-          assert R = std_logic_vector( to_integer(unsigned(A)) != to_integer(unsigned(B)) )  
+          assert R = std_logic_vector( to_integer(unsigned(A)) /= to_integer(unsigned(B)) )  
           report "R = A != B should have been " &
-          integer'image(to_integer( to_integer(unsigned(A)) != to_integer(unsigned(B)) )) & 
+          integer'image(to_integer( to_integer(unsigned(A)) /= to_integer(unsigned(B)) )) & 
           " with A=" & integer'image(to_integer(unsigned(A))) & 
           " and B=" & integer'image(to_integer(unsigned(B))) & 
           " but instead R was " & integer'image(to_integer(unsigned(R))) 

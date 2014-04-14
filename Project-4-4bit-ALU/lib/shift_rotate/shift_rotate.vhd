@@ -73,22 +73,22 @@ ror_mux_0: entity work.mux4_bit port map
 sll_mux_3: entity work.mux4_bit port map 
   (A(0), A(1), A(2), A(3), magnitude, sll_R(3));
 sll_mux_2: entity work.mux4_bit port map 
-  (0, A(0), A(1), A(2), magnitude, sll_R(2));
+  ('0', A(0), A(1), A(2), magnitude, sll_R(2));
 sll_mux_1: entity work.mux4_bit port map 
-  (0, 0, A(0), A(1), magnitude, sll_R(1));
+  ('0', '0', A(0), A(1), magnitude, sll_R(1));
 sll_mux_0: entity work.mux4_bit port map 
-  (0, 0, 0, A(0), magnitude, sll_R(0));
+  ('0', '0', '0', A(0), magnitude, sll_R(0));
 
 -------------------------------------------
 --Shift Right Logical
 -------------------------------------------
 
 srl_mux_3: entity work.mux4_bit port map 
-  (0, 0, 0, A(3), magnitude, srl_R(3));
+  ('0', '0', '0', A(3), magnitude, srl_R(3));
 srl_mux_2: entity work.mux4_bit port map 
-  (0, 0, A(3), A(2), magnitude, srl_R(2));
+  ('0', '0', A(3), A(2), magnitude, srl_R(2));
 srl_mux_1: entity work.mux4_bit port map 
-  (0, A(3), A(2), A(1), magnitude, srl_R(1));
+  ('0', A(3), A(2), A(1), magnitude, srl_R(1));
 srl_mux_0: entity work.mux4_bit port map 
   (A(3), A(2), A(1), A(0), magnitude, srl_R(0));
 

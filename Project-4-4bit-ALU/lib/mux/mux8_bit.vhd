@@ -6,14 +6,14 @@ use IEEE.std_logic_1164.all;
 entity mux8_bit is
 
   port(
-    bit0 : in std_logic := (others => '-');
-    bit1 : in std_logic := (others => '-');
-    bit2 : in std_logic := (others => '-');
-    bit3 : in std_logic := (others => '-');
-    bit4 : in std_logic := (others => '-');
-    bit5 : in std_logic := (others => '-');
-    bit6 : in std_logic := (others => '-');
-    bit7 : in std_logic := (others => '-');
+    bit0 : in std_logic := '-';
+    bit1 : in std_logic := '-';
+    bit2 : in std_logic := '-';
+    bit3 : in std_logic := '-';
+    bit4 : in std_logic := '-';
+    bit5 : in std_logic := '-';
+    bit6 : in std_logic := '-';
+    bit7 : in std_logic := '-';
     S : in std_logic_vector(2 downto 0);
     R : out std_logic
   );
