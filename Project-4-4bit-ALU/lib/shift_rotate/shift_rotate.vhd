@@ -21,18 +21,27 @@ architecture Behavioral of shift_rotate is
 signal rol_R : std_logic_vector(3 downto 0);
 signal ror_R : std_logic_vector(3 downto 0);
 signal sll_R : std_logic_vector(3 downto 0);
+signal sll_R_int : std_logic_vector(3 downto 0);
 signal srl_R : std_logic_vector(3 downto 0);
+signal srl_R_int : std_logic_vector(3 downto 0);
 signal sra_R : std_logic_vector(3 downto 0);
 
 signal magnitude : std_logic_vector(1 downto 0);
+
+--if the shift increment is over four, fill in with 
+--zeros for the logical by setting this flag to zero
+--and anding it with the output of the logical shifter.
+signal flag_if_b_geq_four : std_logic;
 
 begin
 
 -------------------------------------------
 --Set up magnitude
+--and flag
 -------------------------------------------
 
 magnitude <= B(1 downto 0);
+flag_if_b_geq_four <= NOT(B(3) OR B(2));
 
 -------------------------------------------
 --Rotate Left
@@ -71,26 +80,36 @@ ror_mux_0: entity work.mux4_bit port map
 -------------------------------------------
 
 sll_mux_3: entity work.mux4_bit port map 
-  (A(0), A(1), A(2), A(3), magnitude, sll_R(3));
+  (A(0), A(1), A(2), A(3), magnitude, sll_R_int(3));
 sll_mux_2: entity work.mux4_bit port map 
-  ('0', A(0), A(1), A(2), magnitude, sll_R(2));
+  ('0', A(0), A(1), A(2), magnitude, sll_R_int(2));
 sll_mux_1: entity work.mux4_bit port map 
-  ('0', '0', A(0), A(1), magnitude, sll_R(1));
+  ('0', '0', A(0), A(1), magnitude, sll_R_int(1));
 sll_mux_0: entity work.mux4_bit port map 
-  ('0', '0', '0', A(0), magnitude, sll_R(0));
+  ('0', '0', '0', A(0), magnitude, sll_R_int(0));
+
+sll_R(3) <= sll_R_int(3) AND flag_if_b_geq_four;
+sll_R(2) <= sll_R_int(2) AND flag_if_b_geq_four;
+sll_R(1) <= sll_R_int(1) AND flag_if_b_geq_four;
+sll_R(0) <= sll_R_int(0) AND flag_if_b_geq_four;
 
 -------------------------------------------
 --Shift Right Logical
 -------------------------------------------
 
 srl_mux_3: entity work.mux4_bit port map 
-  ('0', '0', '0', A(3), magnitude, srl_R(3));
+  ('0', '0', '0', A(3), magnitude, srl_R_int(3));
 srl_mux_2: entity work.mux4_bit port map 
-  ('0', '0', A(3), A(2), magnitude, srl_R(2));
+  ('0', '0', A(3), A(2), magnitude, srl_R_int(2));
 srl_mux_1: entity work.mux4_bit port map 
-  ('0', A(3), A(2), A(1), magnitude, srl_R(1));
+  ('0', A(3), A(2), A(1), magnitude, srl_R_int(1));
 srl_mux_0: entity work.mux4_bit port map 
-  (A(3), A(2), A(1), A(0), magnitude, srl_R(0));
+  (A(3), A(2), A(1), A(0), magnitude, srl_R_int(0));
+
+srl_R(3) <= srl_R_int(3) AND flag_if_b_geq_four;
+srl_R(2) <= srl_R_int(2) AND flag_if_b_geq_four;
+srl_R(1) <= srl_R_int(1) AND flag_if_b_geq_four;
+srl_R(0) <= srl_R_int(0) AND flag_if_b_geq_four;
 
 -------------------------------------------
 --Shift Right Arithmetic
