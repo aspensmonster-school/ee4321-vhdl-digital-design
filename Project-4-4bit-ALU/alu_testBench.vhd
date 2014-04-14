@@ -8,6 +8,17 @@ USE ieee.std_logic_unsigned.ALL;
 --USE ieee.numeric_std.ALL;
  
 ENTITY alu_testBench IS
+
+  --thanks to: https://groups.google.com/forum/#!topic/comp.lang.vhdl/Ap0d7bl5ExU
+  function to_std_logic_vector(L: BOOLEAN) return std_logic_vector is
+  begin
+    if L then
+      return("0001");
+    else
+      return("0000");
+    end if;
+  end function to_std_logic_vector;
+
 END alu_testBench;
  
 ARCHITECTURE behavior OF alu_testBench IS 
@@ -89,7 +100,7 @@ BEGIN
           integer'image(to_integer(unsigned((A+B)))) & " with A=" &
           integer'image(to_integer(unsigned(A))) & " and B=" &
           integer'image(to_integer(unsigned(B))) & " but instead R was " &
-          integer'image(to_integer(unsigned(Sum))) severity ERROR;
+          integer'image(to_integer(unsigned(R))) severity ERROR;
           count_add_sub := count_add_sub + 1;
         else
           --nada
@@ -114,7 +125,7 @@ BEGIN
           integer'image(to_integer(unsigned((A-B)))) & " with A=" &
           integer'image(to_integer(unsigned(A))) & " and B=" &
           integer'image(to_integer(unsigned(B))) & " but instead R was " &
-          integer'image(to_integer(unsigned(Sum))) severity ERROR;
+          integer'image(to_integer(unsigned(R))) severity ERROR;
           count_add_sub := count_add_sub + 1;
         else
           --nada
@@ -128,6 +139,10 @@ BEGIN
     -- Comparison
     ---------------------------
 
+    --the comparison testing makes use of a user-defined function for converting
+    --a boolean back into a std_logic_vector. it is at the top of this file where
+    --the alu_testBench entity is declared.
+
     -- Test A >= B (signed)
     A <= "0000";
     B <= "0000";
@@ -138,11 +153,11 @@ BEGIN
     for i in 0 to 15 loop
       for j in 0 to 15 loop
         wait for 1 ns;
-        if NOT( R = std_logic_vector( to_integer(signed(A)) >= to_integer(signed(B)) ) )
+        if NOT( R = to_std_logic_vector(to_integer(signed(A)) >= to_integer(signed(B)) ) )
         then
-          assert R = std_logic_vector( to_integer(signed(A)) >= to_integer(signed(B)) )  
+          assert R = to_std_logic_vector( to_integer(signed(A)) >= to_integer(signed(B)) )
           report "R = A >= B signed should have been " &
-          integer'image(to_integer( to_integer(signed(A)) >= to_integer(signed(B)) )) & 
+          boolean'image(to_integer(signed(A)) >= to_integer(signed(B)) ) & 
           " with A=" & integer'image(to_integer(signed(A))) & 
           " and B=" & integer'image(to_integer(signed(B))) & 
           " but instead R was " & integer'image(to_integer(unsigned(R))) 
