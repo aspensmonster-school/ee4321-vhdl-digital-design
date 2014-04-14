@@ -560,7 +560,7 @@ BEGIN
           integer'image(to_integer(shift_right(signed(A),to_integer(unsigned(B))))) & 
           " with A=" & integer'image(to_integer(unsigned(A))) & 
           " and B=" & integer'image(to_integer(unsigned(B))) & 
-          " but instead R was " & integer'image(to_integer(unsigned(R))) 
+          " but instead R was " & integer'image(to_integer(signed(R))) 
           severity ERROR;
           count_shift_rot := count_shift_rot + 1;
         else
