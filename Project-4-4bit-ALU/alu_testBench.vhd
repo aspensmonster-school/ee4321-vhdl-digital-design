@@ -181,11 +181,11 @@ BEGIN
     for i in 0 to 15 loop
       for j in 0 to 15 loop
         wait for 1 ns;
-        if NOT( R = std_logic_vector( to_integer(signed(A)) < to_integer(signed(B)) ) )
+        if NOT( R = to_std_logic_vector( to_integer(signed(A)) < to_integer(signed(B)) ) )
         then
-          assert R = std_logic_vector( to_integer(signed(A)) < to_integer(signed(B)) )  
+          assert R = to_std_logic_vector( to_integer(signed(A)) < to_integer(signed(B)) )  
           report "R = A < B signed should have been " &
-          integer'image(to_integer( to_integer(signed(A)) < to_integer(signed(B)) )) & 
+          boolean'image( to_integer(signed(A)) < to_integer(signed(B)) ) & 
           " with A=" & integer'image(to_integer(signed(A))) & 
           " and B=" & integer'image(to_integer(signed(B))) & 
           " but instead R was " & integer'image(to_integer(unsigned(R))) 
@@ -209,11 +209,11 @@ BEGIN
     for i in 0 to 15 loop
       for j in 0 to 15 loop
         wait for 1 ns;
-        if NOT( R = std_logic_vector( to_integer(unsigned(A)) /= to_integer(unsigned(B)) ) )
+        if NOT( R = to_std_logic_vector( to_integer(unsigned(A)) /= to_integer(unsigned(B)) ) )
         then
-          assert R = std_logic_vector( to_integer(unsigned(A)) /= to_integer(unsigned(B)) )  
+          assert R = to_std_logic_vector( to_integer(unsigned(A)) /= to_integer(unsigned(B)) )  
           report "R = A != B should have been " &
-          integer'image(to_integer( to_integer(unsigned(A)) /= to_integer(unsigned(B)) )) & 
+          boolean'image( to_integer(unsigned(A)) /= to_integer(unsigned(B)) ) & 
           " with A=" & integer'image(to_integer(unsigned(A))) & 
           " and B=" & integer'image(to_integer(unsigned(B))) & 
           " but instead R was " & integer'image(to_integer(unsigned(R))) 
@@ -237,11 +237,11 @@ BEGIN
     for i in 0 to 15 loop
       for j in 0 to 15 loop
         wait for 1 ns;
-        if NOT( R = std_logic_vector( to_integer(unsigned(A)) = to_integer(unsigned(B)) ) )
+        if NOT( R = to_std_logic_vector( to_integer(unsigned(A)) = to_integer(unsigned(B)) ) )
         then
-          assert R = std_logic_vector( to_integer(unsigned(A)) = to_integer(unsigned(B)) )  
+          assert R = to_std_logic_vector( to_integer(unsigned(A)) = to_integer(unsigned(B)) )  
           report "R = A = B should have been " &
-          integer'image(to_integer( to_integer(unsigned(A)) = to_integer(unsigned(B)) )) & 
+          boolean'image( to_integer(unsigned(A)) = to_integer(unsigned(B)) ) & 
           " with A=" & integer'image(to_integer(unsigned(A))) & 
           " and B=" & integer'image(to_integer(unsigned(B))) & 
           " but instead R was " & integer'image(to_integer(unsigned(R))) 
@@ -265,11 +265,11 @@ BEGIN
     for i in 0 to 15 loop
       for j in 0 to 15 loop
         wait for 1 ns;
-        if NOT( R = std_logic_vector( to_integer(unsigned(A)) >= to_integer(unsigned(B)) ) )
+        if NOT( R = to_std_logic_vector( to_integer(unsigned(A)) >= to_integer(unsigned(B)) ) )
         then
-          assert R = std_logic_vector( to_integer(unsigned(A)) >= to_integer(unsigned(B)) )  
+          assert R = to_std_logic_vector( to_integer(unsigned(A)) >= to_integer(unsigned(B)) )  
           report "R = A >= B unsigned should have been " &
-          integer'image(to_integer( to_integer(unsigned(A)) >= to_integer(unsigned(B)) )) & 
+          boolean'image( to_integer(unsigned(A)) >= to_integer(unsigned(B)) ) & 
           " with A=" & integer'image(to_integer(unsigned(A))) & 
           " and B=" & integer'image(to_integer(unsigned(B))) & 
           " but instead R was " & integer'image(to_integer(unsigned(R))) 
@@ -293,11 +293,11 @@ BEGIN
     for i in 0 to 15 loop
       for j in 0 to 15 loop
         wait for 1 ns;
-        if NOT( R = std_logic_vector( to_integer(unsigned(A)) < to_integer(unsigned(B)) ) )
+        if NOT( R = to_std_logic_vector( to_integer(unsigned(A)) < to_integer(unsigned(B)) ) )
         then
-          assert R = std_logic_vector( to_integer(unsigned(A)) < to_integer(unsigned(B)) )  
+          assert R = to_std_logic_vector( to_integer(unsigned(A)) < to_integer(unsigned(B)) )  
           report "R = A < B unsigned should have been " &
-          integer'image(to_integer( to_integer(unsigned(A)) < to_integer(unsigned(B)) )) & 
+          boolean'image( to_integer(unsigned(A)) < to_integer(unsigned(B)) ) & 
           " with A=" & integer'image(to_integer(unsigned(A))) & 
           " and B=" & integer'image(to_integer(unsigned(B))) & 
           " but instead R was " & integer'image(to_integer(unsigned(R))) 
@@ -329,7 +329,7 @@ BEGIN
         then
           assert R = std_logic_vector(A NOR B )
           report "R = A NOR B should have been " &
-          integer'image(to_integer(A NOR B)) & 
+          integer'image(to_integer(unsigned(A NOR B))) & 
           " with A=" & integer'image(to_integer(unsigned(A))) & 
           " and B=" & integer'image(to_integer(unsigned(B))) & 
           " but instead R was " & integer'image(to_integer(unsigned(R))) 
@@ -357,7 +357,7 @@ BEGIN
         then
           assert R = std_logic_vector(A AND B )
           report "R = A AND B should have been " &
-          integer'image(to_integer(A AND B)) & 
+          integer'image(to_integer(unsigned(A AND B))) & 
           " with A=" & integer'image(to_integer(unsigned(A))) & 
           " and B=" & integer'image(to_integer(unsigned(B))) & 
           " but instead R was " & integer'image(to_integer(unsigned(R))) 
@@ -385,7 +385,7 @@ BEGIN
         then
           assert R = std_logic_vector(A OR B )
           report "R = A OR B should have been " &
-          integer'image(to_integer(A OR B)) & 
+          integer'image(to_integer(unsigned(A OR B))) & 
           " with A=" & integer'image(to_integer(unsigned(A))) & 
           " and B=" & integer'image(to_integer(unsigned(B))) & 
           " but instead R was " & integer'image(to_integer(unsigned(R))) 
@@ -413,7 +413,7 @@ BEGIN
         then
           assert R = std_logic_vector(A XOR B )
           report "R = A XOR B should have been " &
-          integer'image(to_integer(A XOR B)) & 
+          integer'image(to_integer(unsigned(A XOR B))) & 
           " with A=" & integer'image(to_integer(unsigned(A))) & 
           " and B=" & integer'image(to_integer(unsigned(B))) & 
           " but instead R was " & integer'image(to_integer(unsigned(R))) 
