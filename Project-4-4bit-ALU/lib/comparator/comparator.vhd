@@ -54,7 +54,7 @@ a_LE_b_SIGNED_R <= diff(3) XOR overflow;
 
 --EQ/NEQ
 --well, *that* was easy :D
-a_NEQ_b_UNSIGNED_R <= zero;
+a_NEQ_b_UNSIGNED_R <= NOT(zero);
 a_EQ_b_UNSIGNED_R <= zero;
 
 --GEQ UNSIGNED
