@@ -1,8 +1,7 @@
 --Helpful resource:
 --ftp://www.cs.uregina.ca/pub/class/301/multiplexer/lecture.html
-use IEEE.std_logic_1164.all;
-
 library IEEE;
+use IEEE.std_logic_1164.all;
 
 entity mux2 is
 
@@ -20,7 +19,7 @@ architecture Behavioural of mux2 is
 begin
 
   with S select
-  R <= bus0 when "0";
-       bus1 when "1";
+  R <= bus0 when '0',
+       bus1 when others;
 
 end Behavioural;

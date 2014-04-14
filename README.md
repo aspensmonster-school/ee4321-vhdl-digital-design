@@ -9,3 +9,5 @@ repository.
 testing with assertions.
 - **Project 3**: A 4-bit CLA. Continuation of modular design and testing.
 - **Project 4**: A 4-bit ALU. Significantly more work than previous labs.
+  Integration of numerous sub-modules into a larger top-level module and
+testing over both the sub-modules and top-level module.
