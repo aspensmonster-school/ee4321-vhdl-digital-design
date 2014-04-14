@@ -78,9 +78,6 @@ or (s(3) and s(2) and s(1) and a(0) and (not b(0)))
 or zero;
 
 --LE UNSIGNED
---A < B always results in diff(3) being set.
---no need to check zero because we're looking at 
---strictly less than.
 a_LE_b_UNSIGNED_R <= (b(3) and (not a(3))) 
 or (s(3) and b(2) and (not a(2)))
 or (s(3) and s(2) and b(1)and (not a(1))) 
