@@ -28,6 +28,7 @@ signal a_NEQ_b_UNSIGNED_R : std_logic:='0';
 signal a_EQ_b_UNSIGNED_R : std_logic:='0';
 signal a_GEQ_b_UNSIGNED_R : std_logic:='0';
 signal a_LE_b_UNSIGNED_R : std_logic:='0';
+signal s : std_logic_vector(3 downto 0);
 
 begin
 
@@ -58,17 +59,32 @@ a_NEQ_b_UNSIGNED_R <= NOT(zero);
 a_EQ_b_UNSIGNED_R <= zero;
 
 --GEQ UNSIGNED
---diff(3) is only 1 if A is less than B.
---There is no case where diff(3) is 1, AND zero is 1, 
---which would cause this to erroneously report a GEQ b.
---(zero wouldn't get set if diff(3) was also set).
-a_GEQ_b_UNSIGNED_R <= NOT(diff(3)) OR zero;
+
+--Well, it turns out unsigned is harder. I'm way behind and 
+--so close to being done, so I'm borrowing some code from here
+--to make sure the tests all work:
+--http://sid-vlsiarena.blogspot.com/2013/03/4-bit-magnitude-comparator-vhdl-code.html
+--I'll have to explain the karnaugh map theory behind it later in the report.
+
+s(0)<= a(0) xnor b(0);
+s(1)<= a(1) xnor b(1);
+s(2)<= a(2) xnor b(2);
+s(3)<= a(3) xnor b(3);
+
+a_GEQ_b_UNSIGNED_R <= (a(3) and (not b(3))) 
+or (s(3) and a(2) and (not b(2))) 
+or (s(3) and s(2) and a(1)and (not b(1))) 
+or (s(3) and s(2) and s(1) and a(0) and (not b(0)))
+or zero;
 
 --LE UNSIGNED
 --A < B always results in diff(3) being set.
 --no need to check zero because we're looking at 
 --strictly less than.
-a_LE_b_UNSIGNED_R <= diff(3);
+a_LE_b_UNSIGNED_R <= (b(3) and (not a(3))) 
+or (s(3) and b(2) and (not a(2)))
+or (s(3) and s(2) and b(1)and (not a(1))) 
+or (s(3) and s(2) and s(1) and b(0) and (not a(0)));
 
 -------------------------------------------
 --select output based on opcode
