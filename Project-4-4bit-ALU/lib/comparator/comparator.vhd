@@ -74,9 +74,9 @@ a_LE_b_UNSIGNED_R <= diff(3);
 --select output based on opcode
 -------------------------------------------
 
-output: entity work.mux8 (a_GEQ_b_SIGNED_R, a_LE_B_SIGNED_R,
+output: entity work.mux8 (open, a_GEQ_b_SIGNED_R, a_LE_B_SIGNED_R,
 a_NEQ_b_UNSIGNED_R, a_EQ_b_UNSIGNED_R, a_GEQ_b_UNSIGNED_R, a_LE_b_UNSIGNED_R,
-DC, DC, op, R);
+open, op, R);
 
 end Behavioral;
 

@@ -6,7 +6,7 @@ use IEEE.std_logic_1164.all;
 entity mux8 is
 
   port(
-    bus0 : in std_logic_vector(3 downto 0);
+    bus0 : in std_logic_vector(3 downto 0) := (others => '-');
     bus1 : in std_logic_vector(3 downto 0);
     bus2 : in std_logic_vector(3 downto 0);
     bus3 : in std_logic_vector(3 downto 0);
