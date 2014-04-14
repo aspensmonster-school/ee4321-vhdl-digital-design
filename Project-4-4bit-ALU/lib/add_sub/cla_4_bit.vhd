@@ -17,7 +17,7 @@ entity cla_4_bit is
            Sum : out  STD_LOGIC_VECTOR (3 downto 0);
            Cout : out  STD_LOGIC;
            zero : out STD_LOGIC;
-           overflow : out STD_LOGIC;
+           overflow : out STD_LOGIC
          );
 end cla_4_bit;
 
@@ -54,7 +54,7 @@ FA3: entity work.full_adder_1_bit port map (A(3),Bxor(3),Cin3,open,Sum(3));
 
 --if any bit in sum is non-zero, then zero gets set to zero. Otherwise, zero 
 --gets set to one.
-zero <= !(Sum(0) OR Sum(1) OR Sum(2) OR Sum(3));
+zero <= NOT(Sum(0) OR Sum(1) OR Sum(2) OR Sum(3));
 
 --detect overflow for signed case.
 overflow <= Cout XOR Cin3;

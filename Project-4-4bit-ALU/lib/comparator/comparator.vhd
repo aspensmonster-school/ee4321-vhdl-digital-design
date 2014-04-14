@@ -15,7 +15,7 @@ entity comparator is
            cout : in STD_LOGIC;
            overflow : in STD_LOGIC;
            diff : in STD_LOGIC_VECTOR (3 downto 0);
-           R : out  STD_LOGIC;
+           R : out  STD_LOGIC
          );
 end comparator;
 

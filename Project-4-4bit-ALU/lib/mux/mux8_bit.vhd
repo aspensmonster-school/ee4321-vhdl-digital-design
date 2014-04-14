@@ -20,7 +20,7 @@ entity mux8_bit is
 
 end mux8_bit;
 
-architecture Behavioural of mux4_bit is
+architecture Behavioural of mux8_bit is
 
 begin
 

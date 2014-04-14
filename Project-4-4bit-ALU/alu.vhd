@@ -4,7 +4,7 @@ use IEEE.STD_LOGIC_1164.ALL;
 entity alu_4_bit is
     Port ( A : in  STD_LOGIC_VECTOR (3 downto 0);
            B : in  STD_LOGIC_VECTOR (3 downto 0);
-           op : in  STD_LOGIC_VECTOR 5 downto 0);
+           op : in  STD_LOGIC_VECTOR (5 downto 0);
            R : out  STD_LOGIC_VECTOR (3 downto 0);
            Cout : out  STD_LOGIC);
 end alu_4_bit;
