@@ -21,6 +21,8 @@ signal comparator_R: std_logic_vector (3 downto 0) := (others => '0');
 signal logical_R: std_logic_vector (3 downto 0);
 signal shift_rot_R: std_logic_vector (3 downto 0);
 
+begin
+
 --adder/subtractor unit
 add_sub: entity work.cla_4_bit port map (A, B, op(3), add_sub_R,
   add_sub_Cout, add_sub_zero, add_sub_overflow);
@@ -36,7 +38,7 @@ logical: entity work.logical port map (A, B, op(1 downto 0), logical_R);
 shift_rot: entity work.shift_rotate port map (A, B, op(2 downto 0), shift_rot_R);
 
 --output selection mux
-output_choice_mux: entity work.mux4 (add_sub_R, comparator_R, logical_R,
+output_choice_mux: entity work.mux4 port map (add_sub_R, comparator_R, logical_R,
   shift_rot_R, op(5 downto 4), R);
 
 --make sure Cout gets assigned
