@@ -136,8 +136,8 @@ sra_mux_0_select: entity work.mux2_bit port map (sra_R_int(0),A(3),flag_if_b_geq
 --Output
 -------------------------------------------
 
-output: entity work.mux8 port map (rol_R, ror_R, sll_R, srl_R, sra_R, open,
-open, open, op, R);
+output: entity work.mux8 port map (rol_R, ror_R, sll_R, srl_R, open, open,
+open, sra_R, op, R);
 
 end Behavioral;
 
