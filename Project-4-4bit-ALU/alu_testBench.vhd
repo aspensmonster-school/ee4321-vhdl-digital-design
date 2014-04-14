@@ -12,8 +12,7 @@ END cla_4_bit_testBench;
  
 ARCHITECTURE behavior OF alu_testBench IS 
  
-    -- Component Declaration for the Unit Under Test (UUT)
- 
+  -- Component Declaration for the Unit Under Test (UUT)
   COMPONENT alu
 
   PORT(
@@ -30,10 +29,10 @@ ARCHITECTURE behavior OF alu_testBench IS
   --Inputs
   signal A : std_logic_vector(3 downto 0) := (others => '0');
   signal B : std_logic_vector(3 downto 0) := (others => '0');
-  signal Cin : std_logic := '0';
+  signal op : std_logic_vector(5 downto 0) := (others => '0');
 
   --Outputs
-  signal Sum : std_logic_vector(3 downto 0);
+  signal R : std_logic_vector(3 downto 0);
   signal Cout : std_logic;
   -- No clocks detected in port list. Replace <clock> below with 
   -- appropriate port name 
@@ -126,6 +125,294 @@ BEGIN
     end loop;
 
     ---------------------------
+    -- Comparison
+    ---------------------------
+
+    -- Test A >= B (signed)
+    A <= "0000";
+    B <= "0000";
+    op <= "011001";
+
+    wait for 1 ns;  
+
+    for i in 0 to 15 loop
+      for j in 0 to 15 loop
+        wait for 1 ns;
+        if NOT( R = std_logic_vector( to_integer(signed(A)) >= to_integer(signed(B)) ) )
+        then
+          assert R = std_logic_vector( to_integer(signed(A)) >= to_integer(signed(B)) )  
+          report "R = A >= B signed should have been " &
+          integer'image(to_integer( to_integer(signed(A)) >= to_integer(signed(B)) )) & 
+          " with A=" & integer'image(to_integer(signed(A))) & 
+          " and B=" & integer'image(to_integer(signed(B))) & 
+          " but instead R was " & integer'image(to_integer(unsigned(R))) 
+          severity ERROR;
+          count_comp := count_comp + 1;
+        else
+          --nada
+        end if;
+        B <= B + "0001";
+      end loop;
+      A <= A + "0001";
+    end loop;
+
+    -- Test A < B (signed)
+    A <= "0000";
+    B <= "0000";
+    op <= "011010";
+
+    wait for 1 ns;  
+
+    for i in 0 to 15 loop
+      for j in 0 to 15 loop
+        wait for 1 ns;
+        if NOT( R = std_logic_vector( to_integer(signed(A)) < to_integer(signed(B)) ) )
+        then
+          assert R = std_logic_vector( to_integer(signed(A)) < to_integer(signed(B)) )  
+          report "R = A < B signed should have been " &
+          integer'image(to_integer( to_integer(signed(A)) < to_integer(signed(B)) )) & 
+          " with A=" & integer'image(to_integer(signed(A))) & 
+          " and B=" & integer'image(to_integer(signed(B))) & 
+          " but instead R was " & integer'image(to_integer(unsigned(R))) 
+          severity ERROR;
+          count_comp := count_comp + 1;
+        else
+          --nada
+        end if;
+        B <= B + "0001";
+      end loop;
+      A <= A + "0001";
+    end loop;
+
+    -- Test A != B
+    A <= "0000";
+    B <= "0000";
+    op <= "011011";
+
+    wait for 1 ns;  
+
+    for i in 0 to 15 loop
+      for j in 0 to 15 loop
+        wait for 1 ns;
+        if NOT( R = std_logic_vector( to_integer(unsigned(A)) != to_integer(unsigned(B)) ) )
+        then
+          assert R = std_logic_vector( to_integer(unsigned(A)) != to_integer(unsigned(B)) )  
+          report "R = A != B should have been " &
+          integer'image(to_integer( to_integer(unsigned(A)) != to_integer(unsigned(B)) )) & 
+          " with A=" & integer'image(to_integer(unsigned(A))) & 
+          " and B=" & integer'image(to_integer(unsigned(B))) & 
+          " but instead R was " & integer'image(to_integer(unsigned(R))) 
+          severity ERROR;
+          count_comp := count_comp + 1;
+        else
+          --nada
+        end if;
+        B <= B + "0001";
+      end loop;
+      A <= A + "0001";
+    end loop;
+
+    -- Test A = B
+    A <= "0000";
+    B <= "0000";
+    op <= "011100";
+
+    wait for 1 ns;  
+
+    for i in 0 to 15 loop
+      for j in 0 to 15 loop
+        wait for 1 ns;
+        if NOT( R = std_logic_vector( to_integer(unsigned(A)) = to_integer(unsigned(B)) ) )
+        then
+          assert R = std_logic_vector( to_integer(unsigned(A)) = to_integer(unsigned(B)) )  
+          report "R = A = B should have been " &
+          integer'image(to_integer( to_integer(unsigned(A)) = to_integer(unsigned(B)) )) & 
+          " with A=" & integer'image(to_integer(unsigned(A))) & 
+          " and B=" & integer'image(to_integer(unsigned(B))) & 
+          " but instead R was " & integer'image(to_integer(unsigned(R))) 
+          severity ERROR;
+          count_comp := count_comp + 1;
+        else
+          --nada
+        end if;
+        B <= B + "0001";
+      end loop;
+      A <= A + "0001";
+    end loop;
+
+    -- Test A >= B (unsigned)
+    A <= "0000";
+    B <= "0000";
+    op <= "011101";
+
+    wait for 1 ns;  
+
+    for i in 0 to 15 loop
+      for j in 0 to 15 loop
+        wait for 1 ns;
+        if NOT( R = std_logic_vector( to_integer(unsigned(A)) >= to_integer(unsigned(B)) ) )
+        then
+          assert R = std_logic_vector( to_integer(unsigned(A)) >= to_integer(unsigned(B)) )  
+          report "R = A >= B unsigned should have been " &
+          integer'image(to_integer( to_integer(unsigned(A)) >= to_integer(unsigned(B)) )) & 
+          " with A=" & integer'image(to_integer(unsigned(A))) & 
+          " and B=" & integer'image(to_integer(unsigned(B))) & 
+          " but instead R was " & integer'image(to_integer(unsigned(R))) 
+          severity ERROR;
+          count_comp := count_comp + 1;
+        else
+          --nada
+        end if;
+        B <= B + "0001";
+      end loop;
+      A <= A + "0001";
+    end loop;
+
+    -- Test A < B (unsigned)
+    A <= "0000";
+    B <= "0000";
+    op <= "011110";
+
+    wait for 1 ns;  
+
+    for i in 0 to 15 loop
+      for j in 0 to 15 loop
+        wait for 1 ns;
+        if NOT( R = std_logic_vector( to_integer(unsigned(A)) < to_integer(unsigned(B)) ) )
+        then
+          assert R = std_logic_vector( to_integer(unsigned(A)) < to_integer(unsigned(B)) )  
+          report "R = A < B unsigned should have been " &
+          integer'image(to_integer( to_integer(unsigned(A)) < to_integer(unsigned(B)) )) & 
+          " with A=" & integer'image(to_integer(unsigned(A))) & 
+          " and B=" & integer'image(to_integer(unsigned(B))) & 
+          " but instead R was " & integer'image(to_integer(unsigned(R))) 
+          severity ERROR;
+          count_comp := count_comp + 1;
+        else
+          --nada
+        end if;
+        B <= B + "0001";
+      end loop;
+      A <= A + "0001";
+    end loop;
+
+    ---------------------------
+    -- Logical
+    ---------------------------
+
+    -- Test A NOR B
+    A <= "0000";
+    B <= "0000";
+    op <= "10XX00";
+
+    wait for 1 ns;  
+
+    for i in 0 to 15 loop
+      for j in 0 to 15 loop
+        wait for 1 ns;
+        if NOT( R = std_logic_vector( A NOR B) )
+        then
+          assert R = std_logic_vector(A NOR B )
+          report "R = A NOR B should have been " &
+          integer'image(to_integer(A NOR B)) & 
+          " with A=" & integer'image(to_integer(unsigned(A))) & 
+          " and B=" & integer'image(to_integer(unsigned(B))) & 
+          " but instead R was " & integer'image(to_integer(unsigned(R))) 
+          severity ERROR;
+          count_logic := count_logic + 1;
+        else
+          --nada
+        end if;
+        B <= B + "0001";
+      end loop;
+      A <= A + "0001";
+    end loop;
+
+    -- Test A AND B
+    A <= "0000";
+    B <= "0000";
+    op <= "10XX01";
+
+    wait for 1 ns;  
+
+    for i in 0 to 15 loop
+      for j in 0 to 15 loop
+        wait for 1 ns;
+        if NOT( R = std_logic_vector( A AND B) )
+        then
+          assert R = std_logic_vector(A AND B )
+          report "R = A AND B should have been " &
+          integer'image(to_integer(A AND B)) & 
+          " with A=" & integer'image(to_integer(unsigned(A))) & 
+          " and B=" & integer'image(to_integer(unsigned(B))) & 
+          " but instead R was " & integer'image(to_integer(unsigned(R))) 
+          severity ERROR;
+          count_logic := count_logic + 1;
+        else
+          --nada
+        end if;
+        B <= B + "0001";
+      end loop;
+      A <= A + "0001";
+    end loop;
+
+    -- Test A OR B
+    A <= "0000";
+    B <= "0000";
+    op <= "10XX10";
+
+    wait for 1 ns;  
+
+    for i in 0 to 15 loop
+      for j in 0 to 15 loop
+        wait for 1 ns;
+        if NOT( R = std_logic_vector( A OR B) )
+        then
+          assert R = std_logic_vector(A OR B )
+          report "R = A OR B should have been " &
+          integer'image(to_integer(A OR B)) & 
+          " with A=" & integer'image(to_integer(unsigned(A))) & 
+          " and B=" & integer'image(to_integer(unsigned(B))) & 
+          " but instead R was " & integer'image(to_integer(unsigned(R))) 
+          severity ERROR;
+          count_logic := count_logic + 1;
+        else
+          --nada
+        end if;
+        B <= B + "0001";
+      end loop;
+      A <= A + "0001";
+    end loop;
+
+    -- Test A XOR B
+    A <= "0000";
+    B <= "0000";
+    op <= "10XX11";
+
+    wait for 1 ns;  
+
+    for i in 0 to 15 loop
+      for j in 0 to 15 loop
+        wait for 1 ns;
+        if NOT( R = std_logic_vector( A XOR B) )
+        then
+          assert R = std_logic_vector(A XOR B )
+          report "R = A XOR B should have been " &
+          integer'image(to_integer(A XOR B)) & 
+          " with A=" & integer'image(to_integer(unsigned(A))) & 
+          " and B=" & integer'image(to_integer(unsigned(B))) & 
+          " but instead R was " & integer'image(to_integer(unsigned(R))) 
+          severity ERROR;
+          count_logic := count_logic + 1;
+        else
+          --nada
+        end if;
+        B <= B + "0001";
+      end loop;
+      A <= A + "0001";
+    end loop;
+
+    ---------------------------
     -- Shift Rotate
     ---------------------------
 
@@ -148,7 +435,7 @@ BEGIN
           " and B=" & integer'image(to_integer(unsigned(B))) & 
           " but instead R was " & integer'image(to_integer(unsigned(R))) 
           severity ERROR;
-          count := count + 1;
+          count_shift_rot := count_shift_rot + 1;
         else
           --nada
         end if;
@@ -176,7 +463,7 @@ BEGIN
           " and B=" & integer'image(to_integer(unsigned(B))) & 
           " but instead R was " & integer'image(to_integer(unsigned(R))) 
           severity ERROR;
-          count := count + 1;
+          count_shift_rot := count_shift_rot + 1;
         else
           --nada
         end if;
@@ -184,6 +471,91 @@ BEGIN
       end loop;
       A <= A + "0001";
     end loop;
+
+    -- TEST Shift Left Logical
+    A <= "0000";
+    B <= "0000";
+    op <= "11X010";
+
+    wait for 1 ns;
+
+    for i in 0 to 15 loop
+      for j in 0 to 15 loop
+        wait for 1 ns;
+        if NOT(R = std_logic_vector(shift_left(unsigned(A),to_integer(unsigned(B))))) 
+        then
+          assert R = std_logic_vector(shift_left(unsigned(A),to_integer(unsigned(B)))) 
+          report "R = A sll B should have been " &
+          integer'image(to_integer(shift_left(unsigned(A),to_integer(unsigned(B))))) & 
+          " with A=" & integer'image(to_integer(unsigned(A))) & 
+          " and B=" & integer'image(to_integer(unsigned(B))) & 
+          " but instead R was " & integer'image(to_integer(unsigned(R))) 
+          severity ERROR;
+          count_shift_rot := count_shift_rot + 1;
+        else
+          --nada
+        end if;
+        B <= B + "0001";
+      end loop;
+      A <= A + "0001";
+    end loop;
+
+    -- TEST Shift Right Logical
+    A <= "0000";
+    B <= "0000";
+    op <= "11X011";
+
+    wait for 1 ns;
+
+    for i in 0 to 15 loop
+      for j in 0 to 15 loop
+        wait for 1 ns;
+        if NOT(R = std_logic_vector(shift_right(unsigned(A),to_integer(unsigned(B))))) 
+        then
+          assert R = std_logic_vector(shift_right(unsigned(A),to_integer(unsigned(B)))) 
+          report "R = A srl B should have been " &
+          integer'image(to_integer(shift_right(unsigned(A),to_integer(unsigned(B))))) & 
+          " with A=" & integer'image(to_integer(unsigned(A))) & 
+          " and B=" & integer'image(to_integer(unsigned(B))) & 
+          " but instead R was " & integer'image(to_integer(unsigned(R))) 
+          severity ERROR;
+          count_shift_rot := count_shift_rot + 1;
+        else
+          --nada
+        end if;
+        B <= B + "0001";
+      end loop;
+      A <= A + "0001";
+    end loop;
+
+    -- TEST Shift Right Arithmetic
+    A <= "0000";
+    B <= "0000";
+    op <= "11X011";
+
+    wait for 1 ns;
+
+    for i in 0 to 15 loop
+      for j in 0 to 15 loop
+        wait for 1 ns;
+        if NOT(R = std_logic_vector(shift_right(signed(A),to_integer(unsigned(B))))) 
+        then
+          assert R = std_logic_vector(shift_right(signed(A),to_integer(unsigned(B)))) 
+          report "R = A sra B should have been " &
+          integer'image(to_integer(shift_right(signed(A),to_integer(unsigned(B))))) & 
+          " with A=" & integer'image(to_integer(unsigned(A))) & 
+          " and B=" & integer'image(to_integer(unsigned(B))) & 
+          " but instead R was " & integer'image(to_integer(unsigned(R))) 
+          severity ERROR;
+          count_shift_rot := count_shift_rot + 1;
+        else
+          --nada
+        end if;
+        B <= B + "0001";
+      end loop;
+      A <= A + "0001";
+    end loop;
+
 
     ---------------------------
     -- Testing Complete.
