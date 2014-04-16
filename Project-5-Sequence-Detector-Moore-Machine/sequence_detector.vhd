@@ -37,7 +37,7 @@ begin
 
     when sr =>
       z <= '0';
-      if X = '0' then
+      if x = '0' then
         next_state <= sr;
       else
         next_state <= s0;
@@ -45,7 +45,7 @@ begin
 
     when s0 =>
       z <= '0';
-      if X = '0' then
+      if x = '0' then
         next_state <= s1;
       else
         next_state <= s0;
@@ -53,7 +53,7 @@ begin
 
     when s1 =>
       z <= '0';
-      if X = '0' then
+      if x = '0' then
         next_state <= sr;
       else
         next_state <= s2;
@@ -61,7 +61,7 @@ begin
 
     when s2 =>
       z <= '0';
-      if X = '0' then
+      if x = '0' then
         next_state <= s1;
       else
         next_state <= s3;
@@ -69,7 +69,7 @@ begin
 
     when s3 =>
       z <= '0';
-      if X = '0' then
+      if x = '0' then
         next_state <= s4;
       else
         next_state <= s0;
@@ -77,7 +77,7 @@ begin
 
     when s4 =>
       z <= '0';
-      if X = '0' then
+      if x = '0' then
         next_state <= s5;
       else
         next_state <= s2;
@@ -85,7 +85,7 @@ begin
 
     when s5 =>
       z <= '0';
-      if X = '0' then
+      if x = '0' then
         next_state <= sr;
       else
         next_state <= s6;
@@ -93,14 +93,14 @@ begin
 
     when s6 =>
       z <= '1';
-      if X = '0' then
+      if x = '0' then
         next_state <= s1;
       else
         next_state <= s0;
       end if;
 
     when others =>
-      current_state <= sr;
+      next_state <= sr;
 
   end case;
 end process;

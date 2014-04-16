@@ -44,8 +44,10 @@ BEGIN
 
   begin
 
-    clock <= NOT(clock) after 10 ns;
-    wait for 20 ns;
+    clock <= '0';
+    wait for 10 ns;
+    clock <= '1';
+    wait for 10 ns;
 
   end process; --end proc_clock
 
@@ -54,6 +56,7 @@ BEGIN
 
   begin
 
+    --this should give a z=1 at the end.
     x <= '1'; wait for 20 ns;
     x <= '0'; wait for 20 ns; 
     x <= '1'; wait for 20 ns;
@@ -61,6 +64,20 @@ BEGIN
     x <= '0'; wait for 20 ns;
     x <= '0'; wait for 20 ns; 
     x <= '1'; wait for 20 ns;
+
+    --this serves as a reset for now. synchronous, but still resets.
+    x <= 'X'; 
+
+    --this should give a z=0 at the end.
+    x <= '1'; wait for 20 ns;
+    x <= '0'; wait for 20 ns; 
+    x <= '1'; wait for 20 ns;
+    x <= '1'; wait for 20 ns; 
+    x <= '0'; wait for 20 ns;
+    x <= '0'; wait for 20 ns; 
+    x <= '0'; wait for 20 ns;
+ 
+    report "Simulation done." severity failure;
 
   end process; --end proc_x_01
 
