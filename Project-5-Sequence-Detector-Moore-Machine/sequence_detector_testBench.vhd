@@ -65,8 +65,12 @@ BEGIN
     x <= '0'; wait for 20 ns; 
     x <= '1'; wait for 20 ns;
 
-    --this serves as a reset for now. synchronous, but still resets.
-    x <= 'X'; 
+    --this serves as a reset for now. Technically it isn't.
+    --the way the moore machine is set up, if x is 0 for the 
+    --two cycles after finding a sequence, the machine ends 
+    --up back in the 'sr' state.
+    x <= '0'; wait for 20 ns;
+    x <= '0'; wait for 20 ns;
 
     --this should give a z=0 at the end.
     x <= '1'; wait for 20 ns;
