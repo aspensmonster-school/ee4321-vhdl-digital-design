@@ -25,6 +25,7 @@ type state_type is (sr, s0, s1, s2, s3, s4, s5, s6);
 --current state defaults to sr
 signal current_state: state_type := sr;
 signal next_state: state_type;
+signal count : std_logic_vector(3 downto 0) := "0000";
 
 BEGIN
 
@@ -93,6 +94,7 @@ begin
 
     when s6 =>
       z <= '1';
+      count <= std_logic_vector(unsigned(count) + 1);
       if x = '0' then
         next_state <= s1;
       else
