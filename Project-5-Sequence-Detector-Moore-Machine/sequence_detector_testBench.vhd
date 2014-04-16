@@ -14,7 +14,7 @@ ARCHITECTURE behavior OF sequence_detector_testBench IS
  
     -- Component Declaration for the Unit Under Test (UUT)
  
-    COMPONENT sequence_detector
+    COMPONENT moore_seq_detect
     PORT(
          x : IN STD_LOGIC;
          clock : IN STD_LOGIC;
@@ -33,7 +33,7 @@ ARCHITECTURE behavior OF sequence_detector_testBench IS
 BEGIN
  
   -- Instantiate the Unit Under Test (UUT)
-  uut: sequence_detector_testBench PORT MAP (
+  uut: moore_seq_detect PORT MAP (
     x => x,
     clock => clock,
     z => z
@@ -54,13 +54,13 @@ BEGIN
 
   begin
 
-    x <= '1'; wait 20 ns;
-    x <= '0'; wait 20 ns; 
-    x <= '1'; wait 20 ns;
-    x <= '1'; wait 20 ns; 
-    x <= '0'; wait 20 ns;
-    x <= '0'; wait 20 ns; 
-    x <= '1'; wait 20 ns;
+    x <= '1'; wait for 20 ns;
+    x <= '0'; wait for 20 ns; 
+    x <= '1'; wait for 20 ns;
+    x <= '1'; wait for 20 ns; 
+    x <= '0'; wait for 20 ns;
+    x <= '0'; wait for 20 ns; 
+    x <= '1'; wait for 20 ns;
 
   end process; --end proc_x_01
 

@@ -8,7 +8,7 @@ entity moore_seq_detect is
   port ( 
     x : IN STD_LOGIC;
     clock : IN STD_LOGIC;
-    z : OUT STD_LOGIC;
+    z : OUT STD_LOGIC
   );
 end;
 
@@ -25,6 +25,8 @@ type state_type is (sr, s0, s1, s2, s3, s4, s5, s6);
 --current state defaults to sr
 signal current_state: state_type := sr;
 signal next_state: state_type;
+
+BEGIN
 
 --combinatorial portion
 proc_cruncher: process(current_state, x)
@@ -98,7 +100,7 @@ begin
       end if;
 
     when others =>
-      current_state <= rs;
+      current_state <= sr;
 
   end case;
 end process;
@@ -113,6 +115,6 @@ begin
   wait until clock'event and clock = '1');
   current_state <= next_state;
 
-end process
+end process;
 
 end Behavioural;
