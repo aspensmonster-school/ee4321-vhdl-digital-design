@@ -124,7 +124,7 @@ proc_clock: process
 
 begin
 
-  wait until clock'event and clock = '1');
+  wait until clock'event and clock = '1';
 
   --I tried simply updating count within the combinatorial block,
   --but it always double counted. Here, we only ever increment 
