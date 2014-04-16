@@ -13,4 +13,14 @@ seven values during the last seven clock cycles.
 My Truth Table
 ==============
 
-asdf.
+|current_state|next_state|output z|
+|             |x=0|x=1|           |
+|:------------|:-:|:-:|----------:|
+|sr|sr|s0|0|
+|s0|s1|s0|0|
+|s1|sr|s2|0|
+|s2|s1|s3|0|
+|s3|s4|s0|0|
+|s4|s5|s2|0|
+|s5|sr|s6|0|
+|s6|s1|s0|1|
