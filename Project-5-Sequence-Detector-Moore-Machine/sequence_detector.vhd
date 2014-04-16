@@ -25,9 +25,20 @@ type state_type is (sr, s0, s1, s2, s3, s4, s5, s6);
 --current state defaults to sr
 signal current_state: state_type := sr;
 signal next_state: state_type;
+
+--count tells us how many times the sequence has been
+--detected
 signal count : std_logic_vector(3 downto 0) := "0000";
 
+--z_internal serves as a snooper for the output z. let's us
+--check value of z during clock process to appropriately 
+--update count variable.
+signal z_internal : std_logic;
+
 BEGIN
+
+--be sure to map z_internal back to the actual output z.
+z <= z_internal;
 
 --combinatorial portion
 proc_cruncher: process(current_state, x)
@@ -37,7 +48,7 @@ begin
   case current_state is
 
     when sr =>
-      z <= '0';
+      z_internal <= '0';
       if x = '0' then
         next_state <= sr;
       else
@@ -45,7 +56,7 @@ begin
       end if;
 
     when s0 =>
-      z <= '0';
+      z_internal <= '0';
       if x = '0' then
         next_state <= s1;
       else
@@ -53,7 +64,7 @@ begin
       end if;
 
     when s1 =>
-      z <= '0';
+      z_internal <= '0';
       if x = '0' then
         next_state <= sr;
       else
@@ -61,7 +72,7 @@ begin
       end if;
 
     when s2 =>
-      z <= '0';
+      z_internal <= '0';
       if x = '0' then
         next_state <= s1;
       else
@@ -69,7 +80,7 @@ begin
       end if;
 
     when s3 =>
-      z <= '0';
+      z_internal <= '0';
       if x = '0' then
         next_state <= s4;
       else
@@ -77,7 +88,7 @@ begin
       end if;
 
     when s4 =>
-      z <= '0';
+      z_internal <= '0';
       if x = '0' then
         next_state <= s5;
       else
@@ -85,7 +96,7 @@ begin
       end if;
 
     when s5 =>
-      z <= '0';
+      z_internal <= '0';
       if x = '0' then
         next_state <= sr;
       else
@@ -93,8 +104,7 @@ begin
       end if;
 
     when s6 =>
-      z <= '1';
-      count <= std_logic_vector(unsigned(count) + 1);
+      z_internal <= '1';
       if x = '0' then
         next_state <= s1;
       else
@@ -115,6 +125,16 @@ proc_clock: process
 begin
 
   wait until clock'event and clock = '1');
+
+  --I tried simply updating count within the combinatorial block,
+  --but it always double counted. Here, we only ever increment 
+  --on the positive edge of the clock, so there's no chance for 
+  --double counting the same z=1 signal (the z=1 signal drops 
+  --by the next clock cycle).
+  if ( z_internal = '1' ) then
+    count <= std_logic_vector(unsigned(count) + 1);
+  end if;
+
   current_state <= next_state;
 
 end process;
