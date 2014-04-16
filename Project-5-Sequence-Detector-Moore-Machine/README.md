@@ -13,8 +13,7 @@ seven values during the last seven clock cycles.
 My Truth Table
 ==============
 
-|current_state|next_state|output z|
-|             |x=0|x=1|           |
+|current_state|next_state if x=0|next_state if x=1|output z|
 |:------------|:-:|:-:|----------:|
 |sr|sr|s0|0|
 |s0|s1|s0|0|
