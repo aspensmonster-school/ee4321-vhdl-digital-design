@@ -33,9 +33,65 @@
 %For hyperlinks
 \usepackage{hyperref}
 
-% There are TONS of other packages you can use for various different cases.
-% Bibliographys are big in research papers but not important for lab reports
-% (I think...?). So I haven't included any bibliography code
+%for putting all figures at the end of the document (useful when 
+%they are large and unwieldy)
+%
+%The renewcommand tells endfloat to put as many floats on a page 
+%as possible, rather than a single float per page.
+%Solution found at: ftp://ctan.tug.org/tex-archive/macros/latex/contrib/endfloat/endfloat.pdf 
+%section 7 titled ``Several floats per page''
+\usepackage{caption}
+\usepackage[nomarkers]{endfloat}
+\renewcommand{\efloatseparator}{\mbox{}}
+
+%bibliography stuff
+\usepackage{filecontents}
+
+%des-paper
+\begin{filecontents*}{des-paper.bib}
+@INPROCEEDINGS{5577878,
+author={Taherkhani, S. and Ever, E. and Gemikonakli, O.},
+booktitle={Computer and Information Technology (CIT), 2010 IEEE 10th
+International Conference on},
+title={Implementation of Non-Pipelined and Pipelined Data Encryption Standard
+(DES) Using Xilinx Virtex-6 FPGA Technology},
+year={2010},
+month={June},
+pages={1257-1262},
+keywords={cryptography;field programmable gate arrays;finite state
+machines;hardware description languages;pipeline processing;very high speed
+integrated circuits;Xilinx Virtex-6 FPGA technology;data generation cycle;field
+programmable gate array technology;finite state machine;high performance
+silicon foundation;nonpipelined data encryption standard;pipelined data
+encryption standard;symmetric encryption algorithm;very high speed integrated
+circuit hardware description language;Algorithm design and
+analysis;Clocks;Encoding;Encryption;Field programmable gate
+arrays;Hardware;Throughput;Data Encryption Standard;Field Programmable Gate
+Arrays;Finite State Machine;Very High Speed Integrated Circuit Hardware
+Description Language},
+doi={10.1109/CIT.2010.227},}
+\end{filecontents*}
+
+%aes-paper
+\begin{filecontents*}{aes-paper.bib}
+@INPROCEEDINGS{6078888,
+author={Gomes, O.S.M. and Moreno, R.L. and Pimenta, T.C.},
+booktitle={Ultra Modern Telecommunications and Control Systems and Workshops
+(ICUMT), 2011 3rd International Congress on},
+title={A fast cryptography pipelined hardware developed in FPGA with VHDL},
+year={2011},
+month={Oct},
+pages={1-6},
+keywords={cryptography;field programmable gate arrays;hardware description
+languages;pipeline processing;AES;FPGA;VHDL;Xilinx Spartan-3;Xilinx
+Virtex-5;advanced encryption standard;cryptography pipelined hardware;field
+programmable gate array;word length 128 bit;Algorithm design and
+analysis;Computer architecture;Encryption;Field programmable gate
+arrays;Hardware;Pipeline
+processing;AES;Cryptography;DES;FPGA;communications;efficient
+encryption/decryption implementation;pipeline;security},
+ISSN={2157-0221},}
+\end{filecontents*}
 
 \begin{document}
 
@@ -61,7 +117,8 @@ VHDL}
 In this term paper for EE4321 VHDL with Dr. Salamy, an investigation is made 
 into the advantages of pipelined architectures/dataflows through the lense of
 common encryption algorithms. Two reference papers are investigated and 
-analyzed, one implementing DES and the other implementing AES.
+analyzed, one implementing the outdated DES and the other implementing its
+successor, AES.  
 \end{abstract}
 
 % Split your lab report into sections by calling \section{Section name}
@@ -72,19 +129,21 @@ bottlenecked on the CPU. Thus hardware implementations were born and baked
 into modern CPUs and programmed onto FPGAs. While this was an improvement 
 the throughput of these designs still left much to be desired.
 
-These two reference papers, by X(1) and X(2), present methods of 
-pipelining two common encryption algorithms. Pipelining permits the 
-output of final data on every clock cycle once the pipeline is filled. 
-Given the relative simplicity of these algorithms in comparison to say 
-pipelined ISAs, the hazards normally encountered when pipelining are 
-largely mitigated. Cheap hardware is capable of working with encrypted data
-at throughputs and latencies comparable to non-encrypted data.
+These two reference papers present methods of pipelining two common encryption
+algorithms. Pipelining permits the output of final data on every clock cycle
+once the pipeline is filled. Given the relative simplicity of these algorithms
+in comparison to, say, pipelined ISAs, the hazards normally encountered when
+pipelining are largely mitigated. Cheap hardware is capable of working with
+encrypted data at throughputs and latencies comparable to non-encrypted data.
 
-Related work is...
+The first reference paper is by Taherkhani, et. al.\cite{5577878} and covers 
+DES. The second reference paper is by Gomes et. al.\cite{6078888} and covers
+DES' successor, AES. Both investigate improvements of pipelined implementations
+over non-pipelined implementations.
 
 \section{Introduction to Concepts}
 
-\IEEEPARstart{B}{oth} AES and DES are known as symmetric encryption schemes. A
+\IEEEPARstart{B}{oth} DES and AES are known as symmetric encryption schemes. A
 single shared secret --called the private key-- exists between two parties,
 both of which will use the key for both encryption and decryption of messages.
 This is in contrast to public key cryptography, in which both parties have a
@@ -105,11 +164,34 @@ then used for subsequent communication; this is how SSL works).
 
 \subsection{DES Algorithm}
 
-asdf
+Part of the elegance of the DES algorithm is that it makes use of only 
+bit shifting and substitution. Each of these is simple to understand and 
+implement. This makes DES an ideal introduction to cryptographic algorithms 
+and their hardware implementations. It should be noted, however, that DES has 
+effectively been deprecated in favor of its successor, AES.
+
+The algorithm is detailed in Figure~\ref{fig_des_algo}. In effect, the key 
+defines the type of shifting and substitution to make in each pass. In each 
+of the 16 passes, a subkey is generated through binary rotation and 
+permutation, and then that subkey is combined with the right half of the 
+input data with a cipher function, before being XORed with the left 
+half of the input data. At that point, the next round begins. 
+
+The form of mixing that is employed is non-linear, making it impossible to 
+``work backwards'' without knowledge of the private key. The shifting, 
+permutation, and cipher function are further described... TBD TBD TBD TBD
+
+\begin{figure*}
+\begin{center}
+\includegraphics[scale=0.4]{des_algo.png}
+\caption{The DES Algorithm. The plus sign indicates an XOR.}
+\label{fig_des_algo}
+\end{center}
+\end{figure*}
 
 \subsection{AES Algorithm}
 
-adsf
+asdfawgaewrghaeg
 
 \section{Summary and Approach}
 
@@ -137,7 +219,8 @@ Good use of block diagrams.
 \section{Shortcomings}
 
 Where is the source code? It isn't in the paper itself and isn't referenced to
-exist anywhere else!
+exist anywhere else! A block diagram is nice, but please: source code so we can
+replicate your work!
 
 \section{Conclusion}
 
@@ -145,7 +228,7 @@ Good god. Please stop screen-shotting non-free software waveform viewers. Stop
 screen-shotting period! And please, PLEASE make the source code and raw data 
 available and easy to find!
 
-\bibliographystyle{ieeetran}
-\bibliography{references}
+\bibliographystyle{IEEEtran}
+\bibliography{des-paper,aes-paper}
 
 \end{document}
