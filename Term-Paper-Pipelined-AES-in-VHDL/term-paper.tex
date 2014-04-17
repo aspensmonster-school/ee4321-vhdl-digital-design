@@ -66,7 +66,21 @@ analyzed, one implementing DES and the other implementing AES.
 
 % Split your lab report into sections by calling \section{Section name}
 \section{Paper Importance and Related Work}
-\IEEEPARstart{T}{his} semester is going to kill me.
+\IEEEPARstart{T}{he} importance of encryption algorithms has grown over 
+time. Traditionally, these algorithms were implemented in software and 
+bottlenecked on the CPU. Thus hardware implementations were born and baked 
+into modern CPUs and programmed onto FPGAs. While this was an improvement 
+the throughput of these designs still left much to be desired.
+
+These two reference papers, by X(1) and X(2), present methods of 
+pipelining two common encryption algorithms. Pipelining permits the 
+output of final data on every clock cycle once the pipeline is filled. 
+Given the relative simplicity of these algorithms in comparison to say 
+pipelined ISAs, the hazards normally encountered when pipelining are 
+largely mitigated. Cheap hardware is capable of working with encrypted data
+at throughputs and latencies comparable to non-encrypted data.
+
+Related work is...
 
 \section{Summary and Approach}
 
