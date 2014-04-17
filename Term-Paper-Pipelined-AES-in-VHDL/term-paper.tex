@@ -82,6 +82,35 @@ at throughputs and latencies comparable to non-encrypted data.
 
 Related work is...
 
+\section{Introduction to Concepts}
+
+\IEEEPARstart{B}{oth} AES and DES are known as symmetric encryption schemes. A
+single shared secret --called the private key-- exists between two parties,
+both of which will use the key for both encryption and decryption of messages.
+This is in contrast to public key cryptography, in which both parties have a
+pair of distinct public and private keys that are related in such a way that
+one may encrypt a message against the public key of another while only the
+holder of the private key may decrypt the message.
+
+The trade-off is apparent: symmetric key cryptography on its own has a single 
+point of failure in the private key. However, public key cryptography 
+requires substantially larger key-lengths to remain robust against brute-force 
+attack in comparison to symmetric algorithms. For this reason symmetric 
+cryptography is often used --especially when the exposure of the shared secret
+is difficult and apparent when it has occured, as in tamper-resistant and
+evident hardware devices-- since the algorithms require less total effort. 
+(An aside: often, the two are combined, with initial public key cryptography 
+facilitating the exchange of shared ``ephermeral'' symmetric keys that are 
+then used for subsequent communication; this is how SSL works).
+
+\subsection{DES Algorithm}
+
+asdf
+
+\subsection{AES Algorithm}
+
+adsf
+
 \section{Summary and Approach}
 
 They made a block diagram of the circuit. They had a figure describing the 
