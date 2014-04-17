@@ -1,0 +1,94 @@
+%% stripped down version of "bare_jrnl.tex" for use in Casey's Circuits I class.
+%% Original version has very good comments for use. You should check it out at
+%% http://www.ieee.org/publications_standards/publications/authors/authors_journals.html
+%% I run GNU/Linux so I downloaded the "Unix LaTeX2e Transactions Style File" package
+%% and based my work off of the sample tex file named "bare_jrnl.tex".
+
+% original author info below (this guy's a rockstar for making his comments so easy to use :P)
+%% 2007/01/11
+%% by Michael Shell
+%% see http://www.michaelshell.org/
+%% for current contact information.
+
+\documentclass[journal,twocolumn]{IEEEtran}
+% make sure "IEEEtran.cls" is in the path of the tex file you are working on
+
+%graphics package for adding images
+\ifCLASSINFOpdf
+  \usepackage[pdftex]{graphicx}
+\else
+   \usepackage[dvips]{graphicx}
+\fi
+
+%math package for math equations
+\usepackage[cmex10]{amsmath}
+
+%float package for putting images where I fucking tell them to go
+\usepackage{float}
+
+%for sourcecode
+\usepackage{listings}
+\lstset{breaklines=true,language=vhdl,basicstyle=\scriptsize,showspaces=false,showstringspaces=false}
+
+%For hyperlinks
+\usepackage{hyperref}
+
+% There are TONS of other packages you can use for various different cases.
+% Bibliographys are big in research papers but not important for lab reports
+% (I think...?). So I haven't included any bibliography code
+
+\begin{document}
+
+% paper title
+% can use linebreaks \\ within to get better formatting as desired
+\title{Non-Pipelined Versus Pipelined Implementation of Encryption Standards in
+VHDL} 
+\author{
+  \IEEEauthorblockN{Preston Maness\\}
+  \IEEEauthorblockA{Texas State University at San Marcos\\
+  pmm50@txstate.edu}
+}
+
+% header
+\markboth{Texas State University, Dr. Salamy, EE4321 VHDL, Spring 2014}%
+{}
+
+% make the title area
+\maketitle
+
+% Give the abstract of your lab here
+\begin{abstract}
+In this term paper for EE4321 VHDL with Dr. Salamy, an investigation is made 
+into the advantages of pipelined architectures/dataflows through the lense of
+common encryption algorithms. Two reference papers are investigated and 
+analyzed, one implementing DES and the other implementing AES.
+\end{abstract}
+
+% Split your lab report into sections by calling \section{Section name}
+\section{Paper Importance and Related Work}
+\IEEEPARstart{T}{his} 
+
+\section{Summary and Approach}
+
+\section{Major Contributions}
+
+%\begin{tabular}{|c|c|c|c|}
+%\hline
+%Value & Expected & Measured & \% error \\
+%\hline
+%$\omega_{o}$ (Hz) & 5894 & 2747 & -53.4\\
+%\hline
+%phase (deg) & 45 & 41.096 & -8.67\\
+%\hline
+%\end{tabular}
+
+\section{Analysis and Improvements}
+
+\section{Shortcomings}
+
+\section{Conclusion}
+
+\bibliographystyle{ieeetran}
+\bibliography{references}
+
+\end{document}
