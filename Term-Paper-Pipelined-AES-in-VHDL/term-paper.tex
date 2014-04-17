@@ -121,6 +121,8 @@ analyzed, one implementing the outdated DES and the other implementing its
 successor, AES.  
 \end{abstract}
 
+\tableofcontents
+
 % Split your lab report into sections by calling \section{Section name}
 \section{Paper Importance and Related Work}
 \IEEEPARstart{T}{he} importance of encryption algorithms has grown over 
@@ -191,16 +193,41 @@ permutation, and cipher function are further described... TBD TBD TBD TBD
 
 \subsection{AES Algorithm}
 
-asdfawgaewrghaeg
+AES is substantially more complicated. No joke. Just check out this 
+comic strip explaining it:
+
+\begin{itemize}
+\item
+\url{http://www.moserware.com/2009/09/stick-figure-guide-to-advanced.html}
+\end{itemize}
+
+Yeah. It's bananas. But it works. Ok, it's not THAT bad, but it IS 
+sensitive to multiple side-channel attacks: malevolent manipulation of CPU
+cache, and timing-based attacks are two examples. There are effective counter-
+measures to them, but they're tricky.
+
+You can get a general picture of the algorithm by looking at 
+Figure~\ref{fig_aes_algo}. Each of the blocks --SubBytes, ShiftRows,
+MixColumns, and AddRoundKey-- require their own explanation that may be found
+in later figures. TBD TBD TBD.
+
+\begin{figure*}
+\begin{center}
+\includegraphics[scale=0.4]{aes_algo.png}
+\caption{The AES Algorithm.}
+\label{fig_aes_algo}
+\end{center}
+\end{figure*}
 
 \section{Summary and Approach}
 
-They made a block diagram of the circuit. They had a figure describing the 
-encryption algos. They made non-pipelined and pipelined versions. The end.
+\IEEEPARstart{A}{fter} covering the basics of the algorithm, each paper then
+describes how their particular FPGA can implement state machines, and how this
+affects the design choices they made.
 
 \section{Major Contributions}
 
-A simple introduction to pipelining with practical applications.
+\IEEEPARstart{A} simple introduction to pipelining with practical applications.
 
 %\begin{tabular}{|c|c|c|c|}
 %\hline
@@ -214,19 +241,39 @@ A simple introduction to pipelining with practical applications.
 
 \section{Analysis and Improvements}
 
-Good use of block diagrams.
+\IEEEPARstart{Y}{ou} know, without their source code, I can't make any
+meaningful analysis or improvements.
 
 \section{Shortcomings}
 
-Where is the source code? It isn't in the paper itself and isn't referenced to
-exist anywhere else! A block diagram is nice, but please: source code so we can
-replicate your work!
+\IEEEPARstart{W}{here} is the source code? It isn't in the paper itself and
+isn't referenced to exist anywhere else! A block diagram is nice, but please:
+source code so we can replicate your work!
+
+This is what I'm talking about:
+
+\begin{quote}
+Various implementations are presented in various
+platforms for DES algorithm in [1], [3], [4], [9], [10].
+However the design provided in this study is implemented
+in Virtex6 FPGA. In the current pipelined design, we put
+buffers in input and output stages of each round. The key
+scheduler part does quite a novel task in current
+implementation. It floods the sub keys to appropriate round.
+The key scheduler implementation specifications are as
+follow: 
+\end{quote}
+
+If I can't replicate your work, then it's not science, and I can't trust 
+any results you give me.
 
 \section{Conclusion}
 
-Good god. Please stop screen-shotting non-free software waveform viewers. Stop 
-screen-shotting period! And please, PLEASE make the source code and raw data 
-available and easy to find!
+\IEEEPARstart{G}{ood} god. Please stop screen-shotting non-free software
+waveform viewers. Stop screen-shotting period! And please, PLEASE make the
+source code and raw data available and easy to find!
+
+Seriously.
 
 \bibliographystyle{IEEEtran}
 \bibliography{des-paper,aes-paper}
