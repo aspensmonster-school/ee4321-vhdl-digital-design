@@ -14,7 +14,7 @@ ARCHITECTURE behavior OF maxOnes_testBench IS
  
     -- Component Declaration for the Unit Under Test (UUT)
  
-    COMPONENT maxOnes
+    COMPONENT maxOnesCounter
     PORT(
          x : IN STD_LOGIC;
          clock : IN STD_LOGIC;
@@ -28,12 +28,12 @@ ARCHITECTURE behavior OF maxOnes_testBench IS
    signal clock : std_logic;
 
    --Outputs
-   signal maxOnes : out std_logic_vector(7 downto 0);
+   signal maxOnes : std_logic_vector(7 downto 0);
  
 BEGIN
  
   -- Instantiate the Unit Under Test (UUT)
-  uut: maxOnes PORT MAP (
+  uut: maxOnesCounter PORT MAP (
     x => x,
     clock => clock,
     maxOnes => maxOnes
@@ -56,7 +56,7 @@ BEGIN
 
   begin
 
-    --this should give maxOnes of 3
+    --this should give maxOnes of 4
     x <= '1'; wait for 20 ns;
     x <= '0'; wait for 20 ns; 
     x <= '1'; wait for 20 ns;
@@ -65,6 +65,11 @@ BEGIN
     x <= '0'; wait for 20 ns; 
     x <= '1'; wait for 20 ns;
     x <= '1'; wait for 20 ns;
+	 x <= '1'; wait for 20 ns;
+	 x <= '1'; wait for 20 ns;
+	 x <= '0'; wait for 20 ns;
+	 x <= '1'; wait for 20 ns;
+	 x <= '1'; wait for 20 ns;
 
     report "Simulation done." severity failure;
 
