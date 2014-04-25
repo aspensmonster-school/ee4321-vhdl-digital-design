@@ -65,11 +65,11 @@ BEGIN
     x <= '0'; wait for 20 ns; 
     x <= '1'; wait for 20 ns;
     x <= '1'; wait for 20 ns;
-	 x <= '1'; wait for 20 ns;
-	 x <= '1'; wait for 20 ns;
-	 x <= '0'; wait for 20 ns;
-	 x <= '1'; wait for 20 ns;
-	 x <= '1'; wait for 20 ns;
+    x <= '1'; wait for 20 ns;
+    x <= '1'; wait for 20 ns;
+    x <= '0'; wait for 20 ns;
+    x <= '1'; wait for 20 ns;
+    x <= '1'; wait for 20 ns;
 
     report "Simulation done." severity failure;
 

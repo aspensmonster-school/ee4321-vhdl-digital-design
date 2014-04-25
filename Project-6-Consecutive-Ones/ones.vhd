@@ -29,8 +29,8 @@ begin
           max := count;
           maxOnes <= std_logic_vector(max);
         end if; --end count > max check
-		else
-		  count := "00000000";
+      else
+         count := "00000000";
       end if; --end main if elss
     end if; --end posedge
   end process;
