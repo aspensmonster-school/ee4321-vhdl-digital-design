@@ -1,5 +1,7 @@
 library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
+USE ieee.numeric_std.ALL;
+USE ieee.std_logic_unsigned.ALL;
 
 --NOTE: The following link is a very helpful reference:
 --http://cseweb.ucsd.edu/~tweng/cse143/VHDLReference/aa.pdf
